@@ -98,7 +98,7 @@ function App() {
               };
 
               try {
-                const response = await fetch('https://pharmalogix-backend-3.onrender.com/api/order', {
+                const response = await fetch('https://pharmalogix-backend-3.onrender.com/api/orders', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
