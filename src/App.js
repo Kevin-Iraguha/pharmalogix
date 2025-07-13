@@ -18,18 +18,11 @@ function App() {
       <header>
         <nav>
           <div className="logo">PharmaLogix</div>
-
-          {/* ✅ Hamburger Button */}
-          <div
-            className="hamburger"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <div className="bar"></div>
             <div className="bar"></div>
             <div className="bar"></div>
           </div>
-
-          {/* ✅ Mobile Menu Toggle */}
           <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
             <a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a>
             <a href="#how-it-works" onClick={() => setIsMenuOpen(false)}>How It Works</a>
@@ -91,11 +84,56 @@ function App() {
         {/* Order Section */}
         <section id="order-now" className="section alt-bg">
           <h2>Order Medicines Online</h2>
-          <p>Receive your prescribed medicines at your doorstep without visiting a pharmacy.</p>
-          <a href="#contact" className="btn primary">
-            <FaPaperPlane style={{ marginRight: "8px" }} />
-            Order Now
-          </a>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const formData = {
+                name: e.target.name.value,
+                medicine: e.target.medicine.value,
+                quantity: e.target.quantity.value,
+                address: e.target.address.value,
+                phone: e.target.phone.value,
+                email: e.target.email.value,
+                notes: e.target.notes.value,
+              };
+
+              try {
+                const response = await fetch('https://pharmalogix-backend-3.onrender.com/api/order', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+                alert(result.message);
+              } catch (error) {
+                alert('Error submitting order.');
+              }
+            }}
+            style={{ maxWidth: "600px", margin: "0 auto", textAlign: "left" }}
+          >
+            <label>Full Name</label>
+            <input type="text" name="name" required style={{ width: "100%", marginBottom: "10px" }} />
+            <label>Medicine Name</label>
+            <input type="text" name="medicine" required style={{ width: "100%", marginBottom: "10px" }} />
+            <label>Quantity</label>
+            <input type="number" name="quantity" min="1" required style={{ width: "100%", marginBottom: "10px" }} />
+            <label>Delivery Address</label>
+            <input type="text" name="address" required style={{ width: "100%", marginBottom: "10px" }} />
+            <label>Phone Number</label>
+            <input type="text" name="phone" required style={{ width: "100%", marginBottom: "10px" }} />
+            <label>Email (optional)</label>
+            <input type="email" name="email" style={{ width: "100%", marginBottom: "10px" }} />
+            <label>Additional Notes (optional)</label>
+            <textarea name="notes" rows="4" style={{ width: "100%", marginBottom: "10px" }}></textarea>
+
+            <button type="submit" className="btn primary">
+              <FaPaperPlane style={{ marginRight: "8px" }} />
+              Submit Order
+            </button>
+          </form>
         </section>
 
         {/* Contact Section */}
