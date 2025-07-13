@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import {
   FaPaperPlane,
@@ -7,35 +7,35 @@ import {
   FaTruck,
 } from "react-icons/fa";
 import orderIllustration from "./assets/order-illustration.png";
+import { motion } from "framer-motion"; // 👈 Added Framer Motion
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false); // for mobile menu
-
   return (
     <div className="App">
       <header>
         <nav>
           <div className="logo">PharmaLogix</div>
-
-          <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-          </div>
-
-          <div className={`nav-links ${isOpen ? "open" : ""}`}>
+          <div className="nav-links">
             <a href="#home">Home</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#order-now">Order Now</a>
             <a href="#about">About</a>
-            <a href="#contact" className="btn">Contact</a>
+            <a href="#contact" className="btn">
+              Contact
+            </a>
           </div>
         </nav>
       </header>
 
       <main>
-        {/* Hero Section */}
-        <section id="home" className="hero">
+        {/* ✅ Hero Section with Animation */}
+        <motion.section
+          id="home"
+          className="hero"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="hero-content">
             <h1>Bridging the Medicine Access Gap in Rwanda</h1>
             <p>Fast and reliable doorstep delivery of prescription medicines.</p>
@@ -51,7 +51,7 @@ function App() {
               style={{ width: "100%", maxWidth: "500px" }}
             />
           </div>
-        </section>
+        </motion.section>
 
         {/* How It Works Section */}
         <section id="how-it-works" className="section">
@@ -78,7 +78,10 @@ function App() {
         {/* Order Section */}
         <section id="order-now" className="section alt-bg">
           <h2>Order Medicines Online</h2>
-          <p>Receive your prescribed medicines at your doorstep without visiting a pharmacy.</p>
+          <p>
+            Receive your prescribed medicines at your doorstep without visiting a
+            pharmacy.
+          </p>
           <a href="#contact" className="btn primary">
             <FaPaperPlane style={{ marginRight: "8px" }} />
             Order Now
