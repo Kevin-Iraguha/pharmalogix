@@ -22,7 +22,7 @@ nav {
   color: #3b82f6;
 }
 
-/* Hamburger menu button */
+/* Hamburger menu */
 .hamburger {
   display: none;
   flex-direction: column;

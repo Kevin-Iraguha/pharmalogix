@@ -1,4 +1,5 @@
-import React from "react";
+// src/App.js
+import React, { useState } from "react";
 import "./App.css";
 import {
   FaPaperPlane,
@@ -7,28 +8,40 @@ import {
   FaTruck,
 } from "react-icons/fa";
 import orderIllustration from "./assets/order-illustration.png";
-import { motion } from "framer-motion"; // 👈 Added Framer Motion
+import { motion } from "framer-motion";
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="App">
       <header>
         <nav>
           <div className="logo">PharmaLogix</div>
-          <div className="nav-links">
-            <a href="#home">Home</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#order-now">Order Now</a>
-            <a href="#about">About</a>
-            <a href="#contact" className="btn">
-              Contact
-            </a>
+
+          {/* ✅ Hamburger Button */}
+          <div
+            className="hamburger"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </div>
+
+          {/* ✅ Mobile Menu Toggle */}
+          <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+            <a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a>
+            <a href="#how-it-works" onClick={() => setIsMenuOpen(false)}>How It Works</a>
+            <a href="#order-now" onClick={() => setIsMenuOpen(false)}>Order Now</a>
+            <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
+            <a href="#contact" className="btn" onClick={() => setIsMenuOpen(false)}>Contact</a>
           </div>
         </nav>
       </header>
 
       <main>
-        {/* ✅ Hero Section with Animation */}
+        {/* Hero Section */}
         <motion.section
           id="home"
           className="hero"
@@ -53,7 +66,7 @@ function App() {
           </div>
         </motion.section>
 
-        {/* How It Works Section */}
+        {/* How It Works */}
         <section id="how-it-works" className="section">
           <h2>How It Works</h2>
           <div className="steps">
@@ -78,10 +91,7 @@ function App() {
         {/* Order Section */}
         <section id="order-now" className="section alt-bg">
           <h2>Order Medicines Online</h2>
-          <p>
-            Receive your prescribed medicines at your doorstep without visiting a
-            pharmacy.
-          </p>
+          <p>Receive your prescribed medicines at your doorstep without visiting a pharmacy.</p>
           <a href="#contact" className="btn primary">
             <FaPaperPlane style={{ marginRight: "8px" }} />
             Order Now
