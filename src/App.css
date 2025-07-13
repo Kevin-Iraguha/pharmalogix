@@ -13,6 +13,7 @@ nav {
   padding: 1rem 2rem;
   background-color: white;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .logo {
@@ -21,15 +22,32 @@ nav {
   color: #3b82f6;
 }
 
+/* Hamburger menu button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+}
+
+/* Navigation links */
 .nav-links {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
   color: #333;
+  font-size: 1rem;
 }
 
 .nav-links .btn {
@@ -64,6 +82,28 @@ nav {
   height: auto;
 }
 
+/* Section styles */
+.section {
+  padding: 2rem;
+  text-align: center;
+}
+
+.alt-bg {
+  background-color: #f3f4f6;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.step {
+  flex: 1 1 200px;
+}
+
 /* Buttons */
 .btn.primary {
   background-color: #3b82f6;
@@ -73,6 +113,16 @@ nav {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 /* Responsive styles */
@@ -82,9 +132,25 @@ nav {
     text-align: center;
   }
 
+  .hamburger {
+    display: flex;
+  }
+
   .nav-links {
+    display: none;
     flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    padding: 1rem 2rem;
+    border-top: 1px solid #eee;
+    z-index: 10;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 
   .nav-links a {

@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { FaPaperPlane, FaPrescriptionBottleAlt, FaUserMd, FaTruck } from "react-icons/fa";
+import {
+  FaPaperPlane,
+  FaPrescriptionBottleAlt,
+  FaUserMd,
+  FaTruck,
+} from "react-icons/fa";
 import orderIllustration from "./assets/order-illustration.png";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false); // for mobile menu
+
   return (
     <div className="App">
       <header>
         <nav>
           <div className="logo">PharmaLogix</div>
-          <div className="nav-links">
+
+          <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </div>
+
+          <div className={`nav-links ${isOpen ? "open" : ""}`}>
             <a href="#home">Home</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#order-now">Order Now</a>
@@ -31,7 +45,11 @@ function App() {
             </a>
           </div>
           <div className="hero-image">
-            <img src={orderIllustration} alt="Order Illustration" style={{ width: "100%", maxWidth: "500px" }} />
+            <img
+              src={orderIllustration}
+              alt="Order Illustration"
+              style={{ width: "100%", maxWidth: "500px" }}
+            />
           </div>
         </section>
 
